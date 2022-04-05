@@ -1,5 +1,5 @@
 # E-Manav Projesi
-![proje kapağı](https://github.com/Iskenderun-Technical-University/proje-onerisi-ymg-taban-cevirme-otomasyonu/blob/main/images/proje%20kapa%C4%9F%C4%B1.png)
+![proje kapağı](https://github.com/Iskenderun-Technical-University/e-manav/blob/main/images/proje%20kapa%C4%9F%C4%B1.png)
 
 </br>
 
