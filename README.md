@@ -14,7 +14,7 @@ Online alışveriş uygulamalarında çeşitli manav ürünleri satılıyor faka
 </br>
 
 ## Use Case Diagram
-![use case diagram](https://github.com/Iskenderun-Technical-University/proje-onerisi-ymg-taban-cevirme-otomasyonu/blob/main/images/Use%20case%20diagram.png)
+![use case diagram](https://github.com/Iskenderun-Technical-University/e-manav/blob/main/images/Use%20case%20diagram.png)
 
 </br>
 
