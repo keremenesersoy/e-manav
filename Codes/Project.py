@@ -16,12 +16,12 @@ app = Flask(__name__)
 
 islem = 3
 
-#app.config["MYSQL_HOST"] = "localhost"  #mysql bağlantısı için bazı verileri girmemiz lazım host olarak localhostu verdik
-#app.config["MYSQL_USER"] = "root"   # kullanıcı adı olarak default gelen rootu verdik
-#app.config["MYSQL_PASSWORD"] = parola   # parola
-#app.config["MYSQL_DB"] = "myblog"   # database ismi
-#app.config["MYSQL_CURSORCLASS"] = "DictCursor"  # veriler bize sözlük yapısında gelecek ve biz bunu flask ile kullanabileceğiz
-                                                # flask ile kullanabilmek için bu keye DictCursor yazmamız lazım
+#app.config["MYSQL_HOST"] = "localhost"
+#app.config["MYSQL_USER"] = "root"   
+#app.config["MYSQL_PASSWORD"] = parola
+#app.config["MYSQL_DB"] = "myblog"   
+#app.config["MYSQL_CURSORCLASS"] = "DictCursor" 
+                                               
 
 #mysql = MySQL(app)
 
@@ -40,8 +40,8 @@ def index():
 def about():
    return render_template("about.html")
 
-@app.route("/article/<string:id>") # eğerki ifadeye string:id yazarsak fonksiyonun içerisine bunu yollayarak kullanabiliriz
-def detail(id):                     # yani urldeki dinamik idyi alıp ona göre sayfamızda kullanabilirz                                  
+@app.route("/article/<string:id>") 
+def detail(id):                                                 
     return "bu sayfanın idsi = " + id
     
 #Register
