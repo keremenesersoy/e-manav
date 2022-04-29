@@ -19,7 +19,7 @@ Online alışveriş uygulamalarında çeşitli manav ürünleri satılıyor faka
 </br>
 
 ## Sınıf Diyagramı
-![class diagram]()
+![class diagram](https://github.com/Iskenderun-Technical-University/e-manav/blob/main/images/UML%20class.png)
 
 </br>
 
