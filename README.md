@@ -13,8 +13,13 @@ Online alışveriş uygulamalarında çeşitli manav ürünleri satılıyor faka
 
 </br>
 
-## Use Case Diagram
+## Use Case Diyagramı
 ![use case diagram](https://github.com/Iskenderun-Technical-University/e-manav/blob/main/images/Use%20case%20diagram.png)
+
+</br>
+
+## Sınıf Diyagramı
+![class diagram]()
 
 </br>
 
