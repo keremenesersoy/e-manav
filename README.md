@@ -42,10 +42,10 @@ Online alışveriş uygulamalarında çeşitli manav ürünleri satılıyor faka
 ## Görev Dağılımı ve Son Tarihler
 
 **Kerem Enes Ersoy** </br>
-- [ ] Sitenin backend kısmı (10.05.2022)
-- [ ] Veri tabanı yönetimi (11.05.2022)
+- [ ] Sitenin backend kısmı (25.05.2022)
+- [ ] Veri tabanı yönetimi (28.05.2022)
 
 
 **İpek Çıdık** </br>
-- [ ] Site tasarımı (05.05.2022)
-- [ ] Sitenin frontend kısmı (09.05.2022)
+- [ ] Site tasarımı (15.05.2022)
+- [ ] Sitenin frontend kısmı (18.05.2022)
