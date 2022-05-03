@@ -1,10 +1,9 @@
-from crypt import methods
-from tokenize import String
 from flask import Flask ,render_template,flash,url_for,redirect,session,logging,request
 from flask_mysqldb import MySQL
 from wtforms import Form,StringField,TextAreaField,PasswordField,validators
 from passlib.hash import sha256_crypt
-from wtforms_components import PhoneNumberField
+import email_validator
+
 
 
 #Register Form
@@ -44,9 +43,9 @@ def register():
         Email = form.Email.data
 
         #cursor = mysql.connection.cursor
-
-
-    return render_template("register.html")
+        redirect(url_for("/"))
+    else:
+        return render_template("register.html",form = form)
 
 
 
