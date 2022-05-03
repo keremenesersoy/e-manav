@@ -3,7 +3,7 @@
 {% block body %}
 {% from 'includes/formhelper.html' import object %}
 
-
+<form>
 <div class="mb-3">
     <label for="name" class="form-label">İsim</label>
     <input type="text" name="name" class="form-control form-control" placeholder="İsim giriniz.">
@@ -37,12 +37,9 @@
     <label for="addres" class="form-label">Adres</label>
     <textarea name="addres" class="form-control" placeholder="Adres giriniz."></textarea>
 </div>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 37d3453f38666a139d79b4629259b1a9bd3d3d96
 {% endblock %}
 
 
