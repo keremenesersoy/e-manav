@@ -8,7 +8,7 @@ name_2 = "Ipek Cidik"
 x = 4
 @app.route("/")
 def index():
-    return render_template("indexflask.html", name1 = name , name_2 = name_2 , sayi = x)
+    return render_template("indexflask.html")
 
 
 
