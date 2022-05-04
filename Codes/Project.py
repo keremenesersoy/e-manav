@@ -19,6 +19,8 @@ class RegisterForm(Form):
     Email = StringField("Email :", validators=[validators.Email(
         message="Lütfen geçerli bir e-mail adresi giriniz")])
 
+    Phone = StringField("Telefon Numarası :",validators=[validators.Length(max = 13,min = 11)])
+    Adress = TextAreaField("Adres :",validators=[validators.Length(max = 100,min = 0)])
 
 app = Flask(__name__)
 app.secret_key = "E-MANAV"
@@ -56,5 +58,6 @@ def register():
 app.route("/login")
 def login():
     return render_template("login.html")
+
 if __name__ == "__main__":
     app.run(debug=True)

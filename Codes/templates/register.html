@@ -1,43 +1,39 @@
 {% extends "index.html" %}
 
 {% block body %}
-{% from 'includes/formhelper.html' import render_field %}
+{% from 'includes/formhelpers.html' import render_field %}
 
 <form>
 <div class="mb-3">
-    <label for="name" class="form-label">İsim</label>
-    <input type="text" name="name" class="form-control form-control" placeholder="İsim giriniz.">
+    
+    {{ render_field(form.Name,class = "form-control") }}
 </div> 
 
 <div class="mb-3">
-    <label for="name" class="form-label">Soyisim</label>
-    <input type="text" name="surname" class="form-control form-control" placeholder="Soyisim giriniz.">
+    
+    {{ render_field(form.SurName,class = "form-control") }}
 </div>
 
 <div class="mb-3">
-    <label for="password" class="form-label">Şifre</label>
-    <input type="password" name="password" class="form-control form-control" placeholder="Şifre belirleyiniz.">
+    {{ render_field(form.Password,class = "form-control") }}
 </div> 
 <div class="mb-3">
-    <label for="password" class="form-label">Şifre (Tekrar)</label>
-    <input type="password" name="password" class="form-control form-control" placeholder="Şifreyi tekrar giriniz.">
+    {{ render_field(form.Confirm,class = "form-control") }}
 </div> 
 
 <div class="mb-3">
-    <label for="email" class="form-label">Email</label>
-    <input type="email" name="email" id="email" class="form-control" placeholder="Email adresinizi giriniz.">
+    {{ render_field(form.Email,class = "form-control") }}
 </div>
 
 <div class="mb-3">
-    <label for="text" class="form-label">Cep Telefonu</label>
-    <input type="phoneNumber" name="ceptelefonu" id="ceptelefonu" class="form-control" placeholder="(+90) (___) ___ - __ __">
+    {{ render_field(form.Phone,class = "form-control") }}
+
 </div>
 
 <div class="mb-3">
-    <label for="addres" class="form-label">Adres</label>
-    <textarea name="addres" class="form-control" placeholder="Adres giriniz."></textarea>
+    {{ render_field(form.Adress,class = "form-control") }}
 </div>
-<button type="submit" class="btn btn-primary">Submit</button>
+<button type="submit" class="btn btn-primary">Kayıt Ol</button>
 </form>
 
 {% endblock %}
