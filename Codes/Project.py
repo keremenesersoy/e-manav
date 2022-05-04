@@ -29,7 +29,7 @@ app.secret_key = "E-MANAV"
 
 @app.route("/")
 def index():
-    return render_template("indexflask.html")
+    return render_template("homepage.html")
 
 @app.route("/login",methods = ["GET","POST"])
 def login():
