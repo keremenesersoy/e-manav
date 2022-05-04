@@ -8,27 +8,22 @@ from passlib.hash import sha256_crypt
 
 # Register Form
 class RegisterForm(Form):
-    Name = StringField("İsim :", validators=[validators.Length(min=2, max=40)])
-    SurName = StringField("Soyisim :", validators=[
+    Name = StringField("isim",validators=[validators.Length(min=2, max=40)])
+    SurName = StringField(validators=[
                           validators.Length(min=2, max=40)])
-    Password = PasswordField("Parola :", validators=[
+    Password = PasswordField(validators=[
         validators.DataRequired(message="Lütfen Parola Belirleyin"),
         validators.EqualTo(fieldname="Confirm", message="Parola Uyuşmuyor")
     ])
-    Confirm = PasswordField("Parola Doğrula :")
-    Email = StringField("Email :", validators=[validators.Email(
+    Confirm = PasswordField()
+    Email = StringField(validators=[validators.Email(
         message="Lütfen geçerli bir e-mail adresi giriniz")])
 
-    Phone = StringField("Telefon Numarası :",validators=[validators.Length(max = 13,min = 11)])
-    Adress = TextAreaField("Adres :",validators=[validators.Length(max = 100,min = 0)])
-
+    Phone = StringField(validators=[validators.Length(max = 13,min = 11)])
+    Adress = TextAreaField(validators=[validators.Length(max = 250,min = 0)])
+   
 app = Flask(__name__)
 app.secret_key = "E-MANAV"
-
-name = "Kerem Enes Ersoys"
-name_2 = "Ipek Cidik"
-x = 4
-
 
 @app.route("/")
 def index():
@@ -55,7 +50,8 @@ def register():
 
     return render_template("register.html")
 
-app.route("/login")
+
+app.route("/login",methods = ["GET","POST"])
 def login():
     return render_template("login.html")
 
