@@ -29,7 +29,7 @@ app.secret_key = "E-MANAV"
 
 @app.route("/")
 def index():
-    return render_template("homepage.html")
+    return render_template("index.html")
 
 @app.route("/login",methods = ["GET","POST"])
 def login():
@@ -39,9 +39,6 @@ def login():
     else:
         return render_template("login.html")
 
-@app.route("/about")
-def about():
-    return render_template("about.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -56,7 +53,7 @@ def register():
         Email = form.Email.data
 
         #cursor = mysql.connection.cursor
-        redirect(url_for("/"))
+        redirect(url_for("index"))
     else:
         return render_template("register.html",form = form)
 
