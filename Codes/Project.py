@@ -8,20 +8,24 @@ from passlib.hash import sha256_crypt
 
 # Register Form
 class RegisterForm(Form):
-    Name = StringField("isim",validators=[validators.Length(min=2, max=40)])
-    SurName = StringField(validators=[
+    Name = StringField("İsim",validators=[validators.Length(min=2, max=40)])
+    SurName = StringField("Soyisim",validators=[
                           validators.Length(min=2, max=40)])
-    Password = PasswordField(validators=[
+    Password = PasswordField("Parola",validators=[
         validators.DataRequired(message="Lütfen Parola Belirleyin"),
         validators.EqualTo(fieldname="Confirm", message="Parola Uyuşmuyor")
     ])
-    Confirm = PasswordField()
-    Email = StringField(validators=[validators.Email(
+    Confirm = PasswordField("Parola Doğrula")
+    Email = StringField("Email",validators=[validators.Email(
         message="Lütfen geçerli bir e-mail adresi giriniz")])
 
-    Phone = StringField(validators=[validators.Length(max = 13,min = 11)])
-    Adress = TextAreaField(validators=[validators.Length(max = 250,min = 0)])
-   
+    Phone = StringField("Telefon",validators=[validators.Length(max = 13,min = 11)])
+    Adress = TextAreaField("Adres",validators=[validators.Length(max = 250,min = 0)])
+
+class LoginForm(Form):
+    e_mail = StringField("Email",validators=[validators.Email(message="Geçerli bir email adresi giriniz")])
+    Password = PasswordField("Parola")
+
 app = Flask(__name__)
 app.secret_key = "E-MANAV"
 
@@ -29,6 +33,14 @@ app.secret_key = "E-MANAV"
 def index():
     return render_template("indexflask.html")
 
+@app.route("/login",methods = ["GET","POST"])
+def login():
+    form = LoginForm(request.form)
+    return render_template("login.html")
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -48,12 +60,6 @@ def register():
         return render_template("register.html",form = form)
 
 
-    return render_template("register.html")
-
-
-app.route("/login",methods = ["GET","POST"])
-def login():
-    return render_template("login.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
