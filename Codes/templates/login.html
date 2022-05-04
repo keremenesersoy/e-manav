@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block body %}
+{% from 'includes/formhelpers.html' import object %}
+
+<form method="post">
+    <div class="mb-3">
+        <label for="name" class="form-label">E-mail</label>
+        <input type="text" name="name" class="form-control form-control" placeholder="E-mail Giriniz">
+    </div> 
+
+    <div class="mb-3">
+        <label for="name" class="form-label">Şifre</label>
+        <input type="text" name="name" class="form-control form-control" placeholder="Şifre Giriniz">
+    </div> 
+
+    <button type="submit" class="btn btn-primary">Giriş Yap</button>
+</form>
+
+{% endblock %}
