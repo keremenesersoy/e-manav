@@ -44,14 +44,25 @@
             border:10px solid #f2f2f2;
             background-color: #f2f2f2;
         }
+        .isepet{
+          color:#f2f2f2;
+          position: relative;
+          top: 2px;
+          margin-right:20px;
+          font-size: 25px;  
+        }
         .urunCard>img:hover{
             opacity:0.8;
+        }
+        .navbarStyle{
+          font-family: 'Montserrat', sans-serif;
+          font-size:18px;
         }
     </style>
 </head>
 <body>
   
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark navbarStyle">
         <a class="navbar-brand" href="/">E-MANAV</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -69,12 +80,14 @@
               <a class="nav-link" href="#urunler">Ürünler <span class="sr-only"></span></a>
             </li>
           </ul>
-    
+
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/register">Kayıt Ol</a>
+              <a class="nav-link fa-solid fa-cart-shopping isepet" href="/register">  Sepetim</a>
             </li>
-    
+            <li class="nav-item active">
+              <a class="nav-link" href="/register">Kayıt Ol</a>
+            </li>    
             <li class="nav-item active">
               <a class="nav-link" href="/login">Giriş Yap</a>
             </li>
