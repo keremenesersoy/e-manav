@@ -33,8 +33,11 @@ def index():
 
 @app.route("/login",methods = ["GET","POST"])
 def login():
-    form = LoginForm(request.form)
-    return render_template("login.html")
+    if request.method == "POST":
+        user = request.form["e_mail"]
+        return render_template("indexflask.html",usr = user)
+    else:
+        return render_template("login.html")
 
 @app.route("/about")
 def about():
