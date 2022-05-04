@@ -4,8 +4,6 @@ from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 
-
-
 # Register Form
 class RegisterForm(Form):
     Name = StringField("İsim",validators=[validators.Length(min=2, max=40)])
@@ -58,8 +56,6 @@ def register():
         redirect(url_for("/"))
     else:
         return render_template("register.html",form = form)
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)
