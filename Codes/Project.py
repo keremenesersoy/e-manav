@@ -5,6 +5,19 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 
+#Kullanıcı Giriş Decoratarı
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "logged_in" in session:
+            return f(*args, **kwargs)
+        else:
+            flash("Bu Sayfayı Görüntülemek İçin Lütfen Giriş Yapın",category="danger")
+            return redirect(url_for("login"))
+    return decorated_function
+
+
+
 # Register Form
 class RegisterForm(Form):
     Name = StringField("İsim",validators=[validators.Length(min=2, max=40)])
@@ -20,10 +33,6 @@ class RegisterForm(Form):
 
     Phone = StringField("Telefon",validators=[validators.Length(max = 13,min = 10)])
     Adress = TextAreaField("Adres",validators=[validators.Length(max = 250,min = 0)])
-
-class LoginForm(Form):
-    e_mail = StringField("Email",validators=[validators.Email(message="Geçerli bir email adresi giriniz")])
-    Password = PasswordField("Parola")
 
 app = Flask(__name__)
 
@@ -64,10 +73,12 @@ def login():
                 return redirect(url_for("index"))
             else:
                 flash("Şifre Yanlış" , category="danger")
+                cursor.close()
                 return redirect(url_for("login"))
 
         else:
             flash("Böyle Bir Kullanıcı Bulunmuyor" , category="danger")
+            cursor.close()
             return redirect(url_for("login"))        
     else:
         return render_template("login.html")
@@ -99,9 +110,20 @@ def register():
     else:
         return render_template("register.html",form = form)
 
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("Başarı İle Çıkış Yapıldı" , category="success")
+    return redirect(url_for("index"))
+
 @app.route("/basket",methods = ["GET" , "POST"])
 def basket():
     return render_template("basket.html") 
+
+@app.route("/myaccount")
+@login_required
+def myaccount():
+    return render_template("myaccount.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
