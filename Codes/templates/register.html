@@ -3,33 +3,15 @@
 {% block body %}
 {% from 'includes/formhelpers.html' import render_field %}
 
-<form>
-<div class="mb-3">
+<form method = "post">
+
     {{ render_field(form.Name,class = "form-control form-control", placeholder="İsim")}}
-</div> 
-
-<div class="mb-3">
     {{ render_field(form.SurName,class = "form-control form-control", placeholder="Soyİsim")}}
-</div>
-
-<div class="mb-3">
-    {{ render_field(form.Password,class = "form-control form-control", placeholder="Şifre")}}
-</div> 
-
-<div class="mb-3">
-    {{ render_field(form.Confirm,class = "form-control form-control", placeholder="Şifre Tekrar")}}
-</div> 
-
-<div class="mb-3">
+    {{ render_field(form.Password,class = "form-control form-control", placeholder="Şifre")}} 
+    {{ render_field(form.Confirm,class = "form-control form-control", placeholder="Şifre Tekrar")}} 
     {{ render_field(form.Email,class = "form-control form-control", placeholder="E-mail")}}
-</div>
-
-<div class="mb-3">
     {{ render_field(form.Phone,class = "form-control form-control", placeholder="(+90) (___) ___ - __ __")}}
-</div>
-<div class="mb-3">
     {{ render_field(form.Adress,class = "form-control form-control", placeholder="Adres Giriniz")}}
-</div>
 <button type="submit" class="btn btn-primary">Kayıt Ol</button>
 </form>
 

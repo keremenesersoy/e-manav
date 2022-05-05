@@ -17,7 +17,7 @@ class RegisterForm(Form):
     Email = StringField("Email",validators=[validators.Email(
         message="Lütfen geçerli bir e-mail adresi giriniz")])
 
-    Phone = StringField("Telefon",validators=[validators.Length(max = 13,min = 11)])
+    Phone = StringField("Telefon",validators=[validators.Length(max = 13,min = 10)])
     Adress = TextAreaField("Adres",validators=[validators.Length(max = 250,min = 0)])
 
 class LoginForm(Form):
@@ -25,7 +25,15 @@ class LoginForm(Form):
     Password = PasswordField("Parola")
 
 app = Flask(__name__)
-app.secret_key = "E-MANAV"
+
+
+app.config["MYSQL_HOST"] = "localhost" 
+app.config["MYSQL_USER"] = "root"  
+app.config["MYSQL_PASSWORD"] = "projesifre123"
+app.config["MYSQL_DB"] = "e_manav"   
+app.config["MYSQL_CURSORCLASS"] = "DictCursor"  
+app.secret_key = "E_MANAV"                                     
+mysql = MySQL(app)
 
 @app.route("/")
 def index():
@@ -33,11 +41,7 @@ def index():
 
 @app.route("/login",methods = ["GET","POST"])
 def login():
-    if request.method == "POST":
-        user = request.form["e_mail"]
-        return render_template("indexflask.html",usr = user)
-    else:
-        return render_template("login.html")
+    return render_template("login.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -49,11 +53,20 @@ def register():
 
         Name = form.Name.data
         SurName = form.SurName.data
-        Password = form.Password.data
+        Password = sha256_crypt.encrypt(form.Password.data)
         Email = form.Email.data
+        Number = form.Phone.data
+        Adress = form.Adress.data
 
-        #cursor = mysql.connection.cursor
-        redirect(url_for("index"))
+        cursor = mysql.connection.cursor()
+        query = f"Insert into users(name,surname,password,email,number,adress) VALUES('{Name}','{SurName}','{Password}','{Email}','{Number}','{Adress}')"
+
+        cursor.execute(query)
+        mysql.connection.commit()
+        cursor.close()
+
+        flash("Başarı İle Kayıt Oldunuz" , category="success")
+        return redirect(url_for("login"))
     else:
         return render_template("register.html",form = form)
 
