@@ -3,6 +3,7 @@ from flask import Flask, render_template, flash, url_for, redirect, session, log
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
+from functools import wraps
 
 # Register Form
 class RegisterForm(Form):
@@ -41,7 +42,35 @@ def index():
 
 @app.route("/login",methods = ["GET","POST"])
 def login():
-    return render_template("login.html")
+    if request.method == "POST":
+        e_mail = request.form["e_mail"]
+        password = request.form["password"]
+
+        cursor = mysql.connection.cursor()
+        query = f"select * from users where email = '{e_mail}'"
+
+        result = cursor.execute(query)
+
+        if result > 0:
+            data = cursor.fetchone()
+            real_password = data["password"]
+
+            if sha256_crypt.verify(password,real_password):
+                flash("Başarı İle Giriş Yaptınız" , category="success")
+                session["logged_in"] = True
+                session["name"] = data["name"].title()
+                session["email"] = data["email"]
+                cursor.close()
+                return redirect(url_for("index"))
+            else:
+                flash("Şifre Yanlış" , category="danger")
+                return redirect(url_for("login"))
+
+        else:
+            flash("Böyle Bir Kullanıcı Bulunmuyor" , category="danger")
+            return redirect(url_for("login"))        
+    else:
+        return render_template("login.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -69,6 +98,10 @@ def register():
         return redirect(url_for("login"))
     else:
         return render_template("register.html",form = form)
+
+@app.route("/basket",methods = ["GET" , "POST"])
+def basket():
+    return render_template("basket.html") 
 
 if __name__ == "__main__":
     app.run(debug=True)
