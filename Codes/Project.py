@@ -65,10 +65,10 @@ def login():
             real_password = data["password"]
 
             if sha256_crypt.verify(password,real_password):
-                flash("Başarı İle Giriş Yaptınız" , category="success")
                 session["logged_in"] = True
                 session["name"] = data["name"].title()
                 session["email"] = data["email"]
+                flash(f"Hoşgeldin {session['name']}" , category="success")
                 cursor.close()
                 return redirect(url_for("index"))
             else:
@@ -111,6 +111,7 @@ def register():
         return render_template("register.html",form = form)
 
 @app.route("/logout")
+@login_required
 def logout():
     session.clear()
     flash("Başarı İle Çıkış Yapıldı" , category="success")
