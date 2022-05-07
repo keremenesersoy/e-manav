@@ -126,5 +126,14 @@ def basket():
 def myaccount():
     return render_template("myaccount.html")
 
+@app.route("/meyvelermenu")
+def meyveler():
+    return render_template("meyvelermenu.html")
+
+
+@app.route("/sebzelermenu")
+def sebzeler():
+    return render_template("sebzelermenu.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
