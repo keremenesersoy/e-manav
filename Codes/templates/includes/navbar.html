@@ -40,22 +40,22 @@
 
         {% if session["logged_in"] %}
         <li class="nav-item">
-          <a class="nav-link" href="/myaccount">Hesabım</a>
+          <button type="button" class="btn btn-outline-secondary"><a class="nav-link active" href="/myaccount">Hesabım</a></button>
         </li>
         <li class="nav-item ">
-          <a class="nav-link" href="/logout">Çıkış</a>
+          <button type="button" class="btn btn-outline-secondary"><a class="nav-link active" href="/logout">Çıkış</a></button>
         </li>
         {% else %}
 
         <li class="nav-item">
-          <a class="nav-link" href="/register">Kayıt Ol</a>
+          <button type="button" class="btn btn-outline-secondary"><a class="nav-link active" href="/register">Kayıt Ol</a></button>
         </li>    
         <li class="nav-item">
-          <a class="nav-link" href="/login">Giriş Yap</a>
+          <button type="button" class="btn btn-outline-secondary"><a class="nav-link active" href="/login">Giriş Yap</a></button>
         </li>
-
         {% endif %}
       </ul>
     </div>
   </div>
 </nav> 
+<br>
