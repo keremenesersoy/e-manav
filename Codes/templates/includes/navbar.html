@@ -22,13 +22,16 @@
         </li>
       </ul>
 
+      {% if session["status"] == "meyvelermenu"  or session["status"] == "sebzelermenu" %}
+      
       <div class="search">
         <input type="text" placeholder="Ara..." spellcheck="false">
         <a href="#">
           <i class="fa-solid fa-magnifying-glass"></i>
         </a>
-
       </div>
+      
+      {% endif %}
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
