@@ -142,5 +142,9 @@ def sebzeler():
     session["status"] = "sebzelermenu"
     return render_template("sebzelermenu.html")
 
+@app.route("/calculate")
+def calculate():
+    print("calculated")
+
 if __name__ == "__main__":
     app.run(debug=True)
