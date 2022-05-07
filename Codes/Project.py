@@ -1,3 +1,4 @@
+from crypt import methods
 import email_validator
 from flask import Flask, render_template, flash, url_for, redirect, session, logging, request
 from flask_mysqldb import MySQL
@@ -142,9 +143,12 @@ def sebzeler():
     session["status"] = "sebzelermenu"
     return render_template("sebzelermenu.html")
 
-@app.route("/calculate")
+@app.route("/calculate" , methods = ["GET","POST"])
 def calculate():
-    print("calculated")
+    para = request.form["bakiye"]
+    print(para)
+    return render_template("basket.html")
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
