@@ -1,3 +1,4 @@
+from re import X
 import email_validator
 from flask import Flask, render_template, flash, url_for, redirect, session, logging, request
 from flask_mysqldb import MySQL
@@ -16,7 +17,43 @@ def login_required(f):
             return redirect(url_for("login"))
     return decorated_function
 
-
+fruits = {
+    "Ananas" : 15,
+    "Avokado" : 6,
+    "Armut" : 11,
+    "Cilek" : 30,
+    "Elma" : 5,
+    "Erik" : 35,
+    "Karpuz" : 8,
+    "Kavun" : 7,
+    "Kiraz" : 12,
+    "Kivi" : 14,
+    "Limon" : 10,
+    "Mandalina" : 6,
+    "Mango" : 16,
+    "Muz" : 16,
+    "Portakal" : 7,
+    "Incir" : 10,
+    "Seftali" : 13,
+    "Uzum" : 8
+}
+vegetables = {
+    "Barbunya" : 12,
+    "Biber" : 18,
+    "Domates" : 14,
+    "Fasulye" : 27,
+    "Havuc" : 4,
+    "Ispanak" : 13,
+    "Kabak" : 2,
+    "Lahana" : 11,
+    "Marul" : 4,
+    "Maydanoz" : 2,
+    "Patates" : 5,
+    "Patlican" : 9,
+    "Salatalik" : 8,
+    "Sarimsak" : 21,
+    "Sogan" : 4
+}
 
 # Register Form
 class RegisterForm(Form):
@@ -131,23 +168,33 @@ def myaccount():
     session["status"] = "myaccount"
     return render_template("myaccount.html")
 
-@app.route("/meyvelermenu")
+@app.route("/meyvelermenu" , methods = ["GET","POST"])
 def meyveler():
     session["status"] = "meyvelermenu"
-    return render_template("meyvelermenu.html")
+    if request.method == "POST":
+        session["Mmiktar"] = request.form["Mbakiye"]
+        return redirect(url_for("calculate_fruit"))
+    else:
+        return render_template("meyvelermenu.html")
 
-
-@app.route("/sebzelermenu")
+@app.route("/sebzelermenu" , methods = ["GET" , "POST"])
 def sebzeler():
     session["status"] = "sebzelermenu"
-    return render_template("sebzelermenu.html")
+    if request.method == "POST":
+        session["Smiktar"] = request.form["Sbakiye"]
+        return redirect(url_for("calculate_vegetable"))
+    else:
+        return render_template("sebzelermenu.html")
 
-@app.route("/calculate" , methods = ["GET","POST"])
-def calculate():
-    para = request.form["bakiye"]
-    print(para)
-    return render_template("basket.html")
+@app.route("/calculate_fruit" , methods = ["GET","POST"])
+def calculate_fruit():
     
+    return render_template("basket.html")
+
+@app.route("/calculate_vegetable" , methods = ["GET","POST"])
+def calculate_vegetable():
+    
+    return render_template("basket.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

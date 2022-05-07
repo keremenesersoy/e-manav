@@ -10,7 +10,8 @@
       <hr class="ayrac"><i class="fa-solid fa-basket-shopping ibeyaz"></i>
       <div class="row row-cols-1 row-cols-md-3 g-4">
 
-        <div class="col">
+
+        <form class="col" method="post" action="/meyvelermenu">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/ananas.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -18,15 +19,15 @@
               <p class="card-text">15 TL/adet</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">adet</span>        
               </div>            
-              <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
-            </div>
+              <button class="btn btn-danger sepetekleButton" type="submit" id="button">Sepete Ekle</button>
+            </div> 
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/avokado.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -34,52 +35,49 @@
               <p class="card-text">6 TL/adet</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">adet</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/armut.jpg" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Armut</h5>
-
               <p class="card-text">11 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
-
             </div>
-          </div>
-        </div>
-        <div class="col">
+          </div>    
+        </form>
+
+        
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/cilek.jpg" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Çilek</h5>
-<<<<<<< HEAD
-              <p class="card-text">Text</p>
-=======
               <p class="card-text">30 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
->>>>>>> 69cd6a6da04fe869839c04720e7bbc7e099ebede
+
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/elma.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -87,15 +85,15 @@
               <p class="card-text">5 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/erik.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -103,15 +101,15 @@
               <p class="card-text">35 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/karpuz.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -119,15 +117,15 @@
               <p class="card-text">8 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/kavun.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -135,15 +133,15 @@
               <p class="card-text">7 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/kiraz.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -151,15 +149,15 @@
               <p class="card-text">12 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/kivi.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -167,15 +165,15 @@
               <p class="card-text">14 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/limon.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -183,15 +181,15 @@
               <p class="card-text">10 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/mandalina.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -199,15 +197,15 @@
               <p class="card-text">6 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/mango.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -215,15 +213,15 @@
               <p class="card-text">16 TL/adet</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">adet</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/muz.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -231,15 +229,15 @@
               <p class="card-text">16 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/portakal.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -247,15 +245,15 @@
               <p class="card-text">7 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/salatalik.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -263,15 +261,15 @@
               <p class="card-text">9 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/seftali.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -279,15 +277,15 @@
               <p class="card-text">13 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col">
+        <form class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/uzum.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -295,13 +293,13 @@
               <p class="card-text">8 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
-                <input type="number" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
+                <input type="number" name = "bakiye" class="form-control" placeholder="Miktar giriniz..." aria-label="miktar" min="1" max="20">  
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
             </div>
           </div>
-        </div>
+        </form>
 
     </div>
 </section>
