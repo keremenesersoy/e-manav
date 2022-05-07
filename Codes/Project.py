@@ -47,10 +47,12 @@ mysql = MySQL(app)
 
 @app.route("/")
 def index():
+    session["status"] = "homepage"
     return render_template("homepage.html")
 
 @app.route("/login",methods = ["GET","POST"])
 def login():
+    session["status"] = "login"
     if request.method == "POST":
         e_mail = request.form["e_mail"]
         password = request.form["password"]
@@ -86,6 +88,7 @@ def login():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    session["status"] = "register"
 
     form = RegisterForm(request.form)
 
@@ -119,20 +122,24 @@ def logout():
 
 @app.route("/basket",methods = ["GET" , "POST"])
 def basket():
+    session["status"] = "basket"
     return render_template("basket.html") 
 
 @app.route("/myaccount")
 @login_required
 def myaccount():
+    session["status"] = "myaccount"
     return render_template("myaccount.html")
 
 @app.route("/meyvelermenu")
 def meyveler():
+    session["status"] = "meyvelermenu"
     return render_template("meyvelermenu.html")
 
 
 @app.route("/sebzelermenu")
 def sebzeler():
+    session["status"] = "sebzelermenu"
     return render_template("sebzelermenu.html")
 
 if __name__ == "__main__":
