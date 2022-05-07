@@ -1,4 +1,3 @@
-from crypt import methods
 import email_validator
 from flask import Flask, render_template, flash, url_for, redirect, session, logging, request
 from flask_mysqldb import MySQL
