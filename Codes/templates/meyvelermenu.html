@@ -1,8 +1,6 @@
 {% extends "index.html" %}
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
-    <script type=text/javascript> $(function() { $("#calculate").click(function (event) { $.getJSON('/SomeFunction', { },
-    function(data) { }); return false; }); }); </script> 
+
 
 {% block body %}
 
@@ -49,6 +47,7 @@
             <img src="static/img/armut.jpg" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Armut</h5>
+
               <p class="card-text">11 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
@@ -56,15 +55,18 @@
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
+
             </div>
           </div>
         </div>
-
         <div class="col">
           <div class="card h-100 shadow urunCard">
             <img src="static/img/cilek.jpg" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Çilek</h5>
+<<<<<<< HEAD
+              <p class="card-text">Text</p>
+=======
               <p class="card-text">30 TL/kg</p>
 
               <div class="input-group mb-1 col-auto">                
@@ -72,6 +74,7 @@
                 <span class="input-group-text">kg</span>        
               </div>            
               <button class="btn btn-danger sepetekleButton" type="button" id="button">Sepete Ekle</button>
+>>>>>>> 69cd6a6da04fe869839c04720e7bbc7e099ebede
             </div>
           </div>
         </div>
