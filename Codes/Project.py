@@ -1,4 +1,3 @@
-from re import X
 import email_validator
 from flask import Flask, render_template, flash, url_for, redirect, session, logging, request
 from flask_mysqldb import MySQL
@@ -183,8 +182,7 @@ def myaccount():
     return render_template("myaccount.html")
 
 @app.route("/meyvelermenu" , methods = ["GET","POST"])
-def meyveler():
-    
+def meyveler():  
     session["status"] = "meyvelermenu"
     if request.method == "POST":
         session["Mmiktar"] = request.form["bakiye"]
@@ -199,7 +197,7 @@ def sebzeler():
         session["Smiktar"] = request.form["bakiye"]
         return redirect(url_for("calculate_vegetable"))
     else:
-        return render_template("sebzelermenu.html")
+        return App.render(render_template("sebzelermenu.html"))
 
 @app.route("/calculate_fruit" , methods = ["GET","POST"])
 def calculate_fruit():
