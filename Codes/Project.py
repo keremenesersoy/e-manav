@@ -5,6 +5,9 @@ from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
+import jyserver.Flask as jyf
+
+
 
 #Kullanıcı Giriş Decoratarı
 def login_required(f):
@@ -81,6 +84,17 @@ app.config["MYSQL_DB"] = "e_manav"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"  
 app.secret_key = "E_MANAV"                                     
 mysql = MySQL(app)
+
+
+@jyf.use(app)
+class App:
+    def increment(self , fruit):
+        
+        print(fruit)
+        #session["selectfruit"] = self.js.document.getElementById('fruit').innerHTML
+        #print(session["selectfruit"])
+        
+
 
 @app.route("/")
 def index():
@@ -176,7 +190,7 @@ def meyveler():
         session["Mmiktar"] = request.form["bakiye"]
         return redirect(url_for("calculate_fruit"))
     else:
-        return render_template("meyvelermenu.html")
+        return App.render(render_template("meyvelermenu.html"))
 
 @app.route("/sebzelermenu" , methods = ["GET" , "POST"])
 def sebzeler():
