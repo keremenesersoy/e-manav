@@ -170,9 +170,10 @@ def myaccount():
 
 @app.route("/meyvelermenu" , methods = ["GET","POST"])
 def meyveler():
+    
     session["status"] = "meyvelermenu"
     if request.method == "POST":
-        session["Mmiktar"] = request.form["Mbakiye"]
+        session["Mmiktar"] = request.form["bakiye"]
         return redirect(url_for("calculate_fruit"))
     else:
         return render_template("meyvelermenu.html")
@@ -181,19 +182,19 @@ def meyveler():
 def sebzeler():
     session["status"] = "sebzelermenu"
     if request.method == "POST":
-        session["Smiktar"] = request.form["Sbakiye"]
+        session["Smiktar"] = request.form["bakiye"]
         return redirect(url_for("calculate_vegetable"))
     else:
         return render_template("sebzelermenu.html")
 
 @app.route("/calculate_fruit" , methods = ["GET","POST"])
 def calculate_fruit():
-    
+    print(session["Mmiktar"])
     return render_template("basket.html")
 
 @app.route("/calculate_vegetable" , methods = ["GET","POST"])
 def calculate_vegetable():
-    
+    print(session["Smiktar"])
     return render_template("basket.html")
 
 if __name__ == "__main__":
