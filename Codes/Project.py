@@ -1,13 +1,12 @@
 import email_validator
 from flask import Flask, render_template, flash, url_for, redirect, session, logging, request
 from flask_mysqldb import MySQL
+from requests import RequestException
 from sympy import product
+from urllib3 import Retry
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
-import jyserver.Flask as jyf
-
-
 
 #Kullanıcı Giriş Decoratarı
 def login_required(f):
@@ -43,7 +42,7 @@ app = Flask(__name__)
 
 app.config["MYSQL_HOST"] = "localhost" 
 app.config["MYSQL_USER"] = "root"  
-app.config["MYSQL_PASSWORD"] = "projesifre123"
+app.config["MYSQL_PASSWORD"] = ""
 app.config["MYSQL_DB"] = "e_manav"   
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"  
 app.secret_key = "E_MANAV"                                     
@@ -87,21 +86,21 @@ products = {
     "Sogan" : 4
 }
 
-@jyf.use(app)
-class App:
-    def increment(self , form ,fruit):
-        print(fruit)
-        print(form)
-        self.js.form.value = ""
 
-        cursor = mysql.connection.cursor()
-        fiyat = products[fruit]
-        islem = fiyat * int(form)
-        query = f"insert into sepet(urun_isim,islem_tutar) values('{fruit}',{islem})"
+def sql_ChangeFunc(query):
+    cursor = mysql.connection.cursor()
+    cursor.execute(query)
+    mysql.connection.commit()
+    cursor.close()
 
-        cursor.execute(query)
-        mysql.connection.commit()
-        cursor.close()
+def sql_SelectFunc(query):
+    cursor = mysql.connection.cursor()
+    cursor.execute(query)
+    data = cursor.fetchall()
+    cursor.close()
+    
+    return data
+
 
 @app.route("/")
 def index():
@@ -112,8 +111,8 @@ def index():
 def login():
     session["status"] = "login"
     if request.method == "POST":
-        e_mail = request.form["e_mail"]
-        password = request.form["password"]
+        e_mail = request.form["e_maill"]
+        password = request.form["passwordd"]
 
         cursor = mysql.connection.cursor()
         query = f"select * from users where email = '{e_mail}'"
@@ -181,7 +180,15 @@ def logout():
 @app.route("/basket",methods = ["GET" , "POST"])
 def basket():
     session["status"] = "basket"
-    return render_template("basket.html") 
+    query = "select * from urun"
+    data = sql_SelectFunc(query)
+    query = "select islem_tutar from urun"
+    toplam = sql_SelectFunc(query)
+    result = 0
+    for i in toplam:
+        result += i['islem_tutar']
+
+    return render_template("basket.html" , datas = data , toplam = result) 
 
 @app.route("/myaccount")
 @login_required
@@ -193,30 +200,66 @@ def myaccount():
 def meyveler():  
     session["status"] = "meyvelermenu"
     if request.method == "POST":
-        session["Mmiktar"] = request.form["bakiye"]
-        print(session["Mmiktar"])
-        return render_template("meyvelermenu.html")
+        print(request.form["product"])
+        print(request.form["bakiye"])
+        urun_isim = request.form["product"]
+        adet = request.form["bakiye"]
+        fiyat = products[urun_isim]
+        img_url = "static/img/" + urun_isim.lower() + ".jpg"
+        islem_tutar = int(fiyat) * int(adet)
+
+        data = sql_SelectFunc("select urun_isim from urun")
+        ui = []
+        for i in data:
+            ui.append(i['urun_isim'])
+        
+        if urun_isim in ui:
+            data = sql_SelectFunc(f"select adet from urun where urun_isim = '{urun_isim}'")
+            a = []
+            for i in data:
+                a.append(i['adet'])
+            adet = int(a[0]) + int(adet)
+            query = f"update urun set adet = {adet} , islem_tutar = {adet * int(fiyat)} where urun_isim = '{urun_isim}'"
+            sql_ChangeFunc(query)
+        else:
+            query = f"insert into urun(urun_isim,islem_tutar,fiyat,img_url,adet) values('{urun_isim}',{islem_tutar},{fiyat},'{img_url}',{adet})"
+            sql_ChangeFunc(query)
+            
+        return redirect(url_for("basket"))
     else:
-        return App.render(render_template("meyvelermenu.html"))
+        return render_template("meyvelermenu.html")
 
 @app.route("/sebzelermenu" , methods = ["GET" , "POST"])
 def sebzeler():
     session["status"] = "sebzelermenu"
     if request.method == "POST":
-        session["Smiktar"] = request.form["bakiye"]
-        return redirect(url_for("calculate_vegetable"))
+        print(request.form["bakiye"])
+        print(request.form["product"])
+        
+        urun_isim = request.form["product"]
+        adet = request.form["bakiye"]
+        fiyat = products[urun_isim]
+        img_url = "static/img/" + urun_isim.lower() + ".jpg"
+        islem_tutar = int(fiyat) * int(adet)
+
+        query = f"insert into urun(urun_isim,islem_tutar,fiyat,img_url,adet) values('{urun_isim}',{islem_tutar},{fiyat},'{img_url}',{adet})"
+        sql_ChangeFunc(query)
+        return redirect(url_for("basket"))
     else:
-        return App.render(render_template("sebzelermenu.html"))
+        return render_template("sebzelermenu.html")
 
-@app.route("/calculate_fruit" , methods = ["GET","POST"])
-def calculate_fruit():
-    print(session["Mmiktar"])
+@app.route("/delete" , methods = ["GET" , "POST"])
+def delete():
+    if request.method == "POST":
+        delete = request.form['delete'].lower()
+        query = f"delete from urun where urun_isim = '{delete}'"
+        cursor = mysql.connection.cursor()
+        cursor.execute(query)
+        mysql.connection.commit()
+        cursor.close()
+        return redirect(url_for('basket'))
     return render_template("basket.html")
 
-@app.route("/calculate_vegetable" , methods = ["GET","POST"])
-def calculate_vegetable():
-    print(session["Smiktar"])
-    return render_template("basket.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
