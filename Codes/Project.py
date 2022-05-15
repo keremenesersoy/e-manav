@@ -202,7 +202,11 @@ def basket():
 @login_required
 def myaccount():
     session["status"] = "myaccount"
-    return render_template("myaccount.html")
+    email = session['email']
+    query = f"select * from users where email = '{email}'"
+    data  = sql_SelectFunc(query)
+
+    return render_template("myaccount.html",data = data[0])
 
 @app.route("/meyvelermenu" , methods = ["GET","POST"])
 def meyveler():  
