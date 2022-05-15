@@ -175,6 +175,7 @@ def login():
                 session["logged_in"] = True
                 session["name"] = data["name"].title()
                 session["email"] = data["email"]
+                session['id'] = data['id']
                 flash(f"Hoşgeldin {session['name']}", category="success")
                 cursor.close()
                 return redirect(url_for("index"))
@@ -309,7 +310,7 @@ def sebzeler():
     session["search"] = False
     session["status"] = "sebzelermenu"
     if request.method == "POST":
-        
+
         urun_isim = request.form["product"]
         adet = request.form["bakiye"]
         fiyat = products[urun_isim]
@@ -355,8 +356,23 @@ def delete():
 def siparis():
     if request.method == "GET":
         
+
+        query = "select * from urun"
+        data = sql_SelectFunc(query)
+        
+        for i in data:
+            urun_isim = i['urun_isim']
+            islem_tutar = i['islem_tutar']
+            fiyat = i['fiyat']
+            img_url = i['img_url']
+            adet = i['adet'] 
+            user_id = session['id']
+            query = f"insert into history(urun_isim,islem_tutar,fiyat,img_url,adet,user_id) values('{urun_isim}',{islem_tutar},{fiyat},'{img_url}',{adet},{user_id})"
+            sql_ChangeFunc(query)
+        
         query = "delete from urun"
         sql_ChangeFunc(query)
+
         flash("Sipariş Talebiniz Başarıyla Alındı En Kısa Zamanda Yola Çıkacaktır" , category="success")
         return redirect(url_for('index'))
 
