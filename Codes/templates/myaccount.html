@@ -2,12 +2,12 @@
 
 {% block body %}
 
-<div class="d-flex align-items-start menu">
+<div class="d-flex align-items-start menu hesabim">
     <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       <button class="nav-link active btn-danger" id="v-pills-bilgiler-tab" data-bs-toggle="pill" data-bs-target="#v-pills-bilgiler" type="button" role="tab" aria-controls="v-pills-bilgiler" aria-selected="true">Kullanıcı Bilgilerim</button>
       <button class="nav-link btn-danger" id="v-pills-basket-tab" data-bs-toggle="pill" data-bs-target="#v-pills-basket" type="button" role="tab" aria-controls="v-pills-basket" aria-selected="false">Siparişlerim</button>
       <button class="nav-link btn-danger" id="v-pills-sifreAyarlari-tab" data-bs-toggle="pill" data-bs-target="#v-pills-sifreAyarlari" type="button" role="tab" aria-controls="v-pills-sifreAyarlari" aria-selected="false">Şifre Ayarları</button>  
-      <button class="nav-link btn-danger" id="v-pills-hesapAyarlari-tab" data-bs-toggle="pill" data-bs-target="#v-pills-hesapAyarlari" type="button" role="tab" aria-controls="v-pills-hesapAyarlari" aria-selected="false">Hesap Ayarları</button>            
+      <button class="nav-link btn-danger" id="v-pills-hesabıSil-tab" data-bs-toggle="pill" data-bs-target="#v-pills-hesabıSil" type="button" role="tab" aria-controls="v-pills-hesabıSil" aria-selected="false">Hesabımı Sil</button>            
       
     </div>
     <div class="tab-content" id="v-pills-tabContent">
@@ -41,7 +41,7 @@
       </div>
 
       <div class="tab-pane fade" id="v-pills-basket" role="tabpanel" aria-labelledby="v-pills-basket-tab">
-
+        
       </div>
 
       <div class="tab-pane fade" id="v-pills-sifreAyarlari" role="tabpanel" aria-labelledby="v-pills-sifreAyarlari-tab">
@@ -63,25 +63,9 @@
           <button class="btn btn-secondary mx-md-5">Şifre Değiştir</button>   
         </form>
     </div>
-
-    <div class="tab-pane fade" id="v-pills-hesapAyarlari" role="tabpanel" aria-labelledby="v-pills-hesapAyarlari-tab">
-      <div><a class="btn btn-secondary mx-md-5 mt-3" href="/logout" role="button">Çıkış Yap</a></div>
-      <br>
-      <div><a class="btn btn-secondary mx-md-5" href="/logout" role="button">Hesabımı Sil</a></div>
-    </div>
   </div>
 
-
 {% endblock %}
 
 
-{% block footer %}
-        <br><br><br>
-       <!--footer-->
-       <div class="bg-dark text-light text-center" id="footer">
-        <p class="alighn-middle p-5 mb-0">
-            <span>Tüm hakları saklıdır &copy; | 2022</span><br>
-            <span><i>Designed by </i> <b>İpek ÇIDIK & Kerem Enes ERSOY</b></span>
-        </p>
-    </div> 
-{% endblock %}
+
