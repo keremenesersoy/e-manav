@@ -12,11 +12,11 @@
         </li>
         {% if session["status"] == "homepage" %}
         <li class="nav-item">
-          <a class="nav-link active" href="#hakkimizda">Hakkımızda</a>
+          <a class="nav-link active" href="#hakkimizda"><b>Hakkımızda</b></a>
         </li>
         {% endif %}
         <li class="nav-item dropdown active">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ürünler</a>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><b>Ürünler</b></a>
           <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
             <li><a class="dropdown-item" href="/meyvelermenu">Meyveler</a></li>
             <li><a class="dropdown-item" href="/sebzelermenu">Sebzeler</a></li>
@@ -42,10 +42,10 @@
 
         {% if session["logged_in"] %}
         <li class="nav-item">
-          <button type="button" class="btn btn-outline-secondary"><a class="nav-link active" href="/myaccount">Hesabım</a></button>
+          <button type="button" class="btn btn-outline-secondary"><a class="nav-link active" href="/myaccount"><b>Hesabım</b></a></button>
         </li>
         <li class="nav-item ">
-          <button type="button" class="btn btn-outline-secondary"><a class="nav-link active" href="/logout">Çıkış</a></button>
+          <button type="button" class="btn btn-outline-secondary"><a class="nav-link active" href="/logout"><b>Çıkış</b></a></button>
         </li>
         {% else %}
 
