@@ -94,6 +94,44 @@ products = {
     "Sogan": 4
 }
 
+fruits = [
+    "Ananas",
+    "Avokado",
+    "Armut",
+    "Cilek",
+    "Elma",
+    "Erik",
+    "Karpuz",
+    "Kavun",
+    "Kiraz",
+    "Kivi",
+    "Limon",
+    "Mandalina",
+    "Mango",
+    "Muz",
+    "Portakal",
+    "Incir",
+    "Seftali",
+    "Uzum"
+    ]
+vegetables = [
+     "Barbunya",
+    "Biber",
+    "Domates",
+    "Fasulye",
+    "Havuc",
+    "Ispanak",
+    "Kabak",
+    "Lahana",
+    "Marul",
+    "Maydanoz",
+    "Patates",
+    "Patlican",
+    "Salatalik",
+    "Sarimsak",
+    "Sogan"
+]
+
 
 def sql_ChangeFunc(query):
     cursor = mysql.connection.cursor()
@@ -232,8 +270,10 @@ def myaccount():
     return render_template("myaccount.html", data=data[0])
 
 
+
 @app.route("/meyvelermenu", methods=["GET", "POST"])
 def meyveler():
+
     session["status"] = "meyvelermenu"
     if request.method == "POST":
         print(request.form["product"])
@@ -269,6 +309,7 @@ def meyveler():
 
 @app.route("/sebzelermenu", methods=["GET", "POST"])
 def sebzeler():
+    session["search"] = False
     session["status"] = "sebzelermenu"
     if request.method == "POST":
         print(request.form["bakiye"])
@@ -313,6 +354,16 @@ def delete():
         cursor.close()
         return redirect(url_for('basket'))
     return render_template("basket.html")
+
+@app.route("/siparis" , methods = ["GET"])
+@login_required
+def siparis():
+    if request.method == "GET":
+        
+        query = "delete from urun"
+        sql_ChangeFunc(query)
+        flash("Sipariş Talebiniz Başarıyla Alındı En Kısa Zamanda Yola Çıkacaktır" , category="success")
+        return redirect(url_for('index'))
 
 
 if __name__ == "__main__":
