@@ -1,7 +1,9 @@
 import email_validator
 from flask import Flask, render_template, flash, url_for, redirect, session, logging, request
 from flask_mysqldb import MySQL
+from regex import F
 from requests import RequestException
+from sqlalchemy import true
 from sympy import product
 from urllib3 import Retry
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
@@ -187,8 +189,14 @@ def basket():
     result = 0
     for i in toplam:
         result += i['islem_tutar']
-
+    print(len(data))
+    
+    session["TF"] = True
+    if len(data) == 0:
+        session["TF"] = False
+    
     return render_template("basket.html" , datas = data , toplam = result) 
+
 
 @app.route("/myaccount")
 @login_required
@@ -242,8 +250,22 @@ def sebzeler():
         img_url = "static/img/" + urun_isim.lower() + ".jpg"
         islem_tutar = int(fiyat) * int(adet)
 
-        query = f"insert into urun(urun_isim,islem_tutar,fiyat,img_url,adet) values('{urun_isim}',{islem_tutar},{fiyat},'{img_url}',{adet})"
-        sql_ChangeFunc(query)
+        data = sql_SelectFunc("select urun_isim from urun")
+        ui = []
+        for i in data:
+            ui.append(i['urun_isim'])
+        
+        if urun_isim in ui:
+            data = sql_SelectFunc(f"select adet from urun where urun_isim = '{urun_isim}'")
+            a = []
+            for i in data:
+                a.append(i['adet'])
+            adet = int(a[0]) + int(adet)
+            query = f"update urun set adet = {adet} , islem_tutar = {adet * int(fiyat)} where urun_isim = '{urun_isim}'"
+            sql_ChangeFunc(query)
+        else:
+            query = f"insert into urun(urun_isim,islem_tutar,fiyat,img_url,adet) values('{urun_isim}',{islem_tutar},{fiyat},'{img_url}',{adet})"
+            sql_ChangeFunc(query)
         return redirect(url_for("basket"))
     else:
         return render_template("sebzelermenu.html")
