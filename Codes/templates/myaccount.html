@@ -6,18 +6,68 @@
     <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       <button class="nav-link active btn-danger" id="v-pills-bilgiler-tab" data-bs-toggle="pill" data-bs-target="#v-pills-bilgiler" type="button" role="tab" aria-controls="v-pills-bilgiler" aria-selected="true">Kullanıcı Bilgilerim</button>
       <button class="nav-link btn-danger" id="v-pills-basket-tab" data-bs-toggle="pill" data-bs-target="#v-pills-basket" type="button" role="tab" aria-controls="v-pills-basket" aria-selected="false">Siparişlerim</button>
-      <a href="/logout" type="button" class="nav-link btn-danger text-center">Çıkış Yap</a>
+      <button class="nav-link btn-danger" id="v-pills-sifreAyarlari-tab" data-bs-toggle="pill" data-bs-target="#v-pills-sifreAyarlari" type="button" role="tab" aria-controls="v-pills-sifreAyarlari" aria-selected="false">Şifre Ayarları</button>  
+      <button class="nav-link btn-danger" id="v-pills-hesapAyarlari-tab" data-bs-toggle="pill" data-bs-target="#v-pills-hesapAyarlari" type="button" role="tab" aria-controls="v-pills-hesapAyarlari" aria-selected="false">Hesap Ayarları</button>            
+      
     </div>
     <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade show active" id="v-pills-bilgiler" role="tabpanel" aria-labelledby="v-pills-bilgiler-tab">
-        <p>isim =  {{data['name']}}</p>
-        <p>soyisim =  {{data['surname']}}</p>
-        <p>email =  {{data['email']}}</p>
-        <p>number =  {{data['number']}}</p>
-        <p>adres =  {{data['adress']}}</p>
+      <div class="tab-pane fade show active" id="v-pills-bilgiler" role="tabpanel" aria-labelledby="v-pills-bilgiler-tab">        
+        <form class="">
+          <div class="mx-md-5">
+            <b><label for="name">İsim: </label></b>
+            <input type="text" class="form-control bilgi" id="name" value="{{data['name']}}" readonly>
+          </div>
+          <br>
+          <div class="mx-md-5">
+            <b><label for="surname">Soyisim: </label></b>
+            <input type="text" class="form-control bilgi" id="surname" value="{{data['surname']}}" readonly>
+          </div>
+          <br>
+          <div class="mx-md-5">
+            <b><label for="email">Email: </label></b>
+            <input type="text" class="form-control bilgi" id="email" value="{{data['email']}}" readonly>
+          </div>
+          <br>
+          <div class="mx-md-5">
+            <b><label for="number">Telefon Numarası: </label></b>
+            <input type="text" class="form-control bilgi" id="number" value="{{data['number']}}" readonly>
+          </div>
+          <br>          
+          <div class="mx-md-5">
+            <b><label for="adress">Adres: </label></b>
+            <input type="text" class="form-control bilgi" id="adress" value="{{data['adress']}}" readonly>
+          </div>          
+        </form>
       </div>
-      <div class="tab-pane fade" id="v-pills-basket" role="tabpanel" aria-labelledby="v-pills-basket-tab">...</div>
-      <div class="tab-pane fade" id="v-pills-cikisyap" role="tabpanel" aria-labelledby="v-pills-cikisyap-tab">...</div>
+
+      <div class="tab-pane fade" id="v-pills-basket" role="tabpanel" aria-labelledby="v-pills-basket-tab">
+
+      </div>
+
+      <div class="tab-pane fade" id="v-pills-sifreAyarlari" role="tabpanel" aria-labelledby="v-pills-sifreAyarlari-tab">
+        <form>
+          <div class="">     
+            <div class="form-outline mb-4 mx-md-5">
+              <b><label class="form-label" for="password">Mevcut Şifre</label></b>
+              <input type="password" name="passwordd" id="password" class="form-control" />   
+            </div>
+            <div class="form-outline mb-4 mx-md-5">
+              <b><label class="form-label" for="password">Yeni Şifre</label></b>
+              <input type="password" name="newpassword1" id="password" class="form-control" />                  
+            </div>
+            <div class="form-outline mb-4 mx-md-5">
+              <b><label class="form-label" for="password">Yeni Şifre (Tekrar)</label></b>
+              <input type="password" name="newpassword2" id="password" class="form-control" />                  
+            </div>        
+          </div>       
+          <button class="btn btn-secondary mx-md-5">Şifre Değiştir</button>   
+        </form>
+    </div>
+
+    <div class="tab-pane fade" id="v-pills-hesapAyarlari" role="tabpanel" aria-labelledby="v-pills-hesapAyarlari-tab">
+      <div><a class="btn btn-secondary mx-md-5 mt-3" href="/logout" role="button">Çıkış Yap</a></div>
+      <br>
+      <div><a class="btn btn-secondary mx-md-5" href="/logout" role="button">Hesabımı Sil</a></div>
     </div>
   </div>
 

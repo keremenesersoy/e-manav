@@ -11,82 +11,87 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 
-#Kullanıcı Giriş Decoratarı
+# Kullanıcı Giriş Decoratarı
+
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if "logged_in" in session:
             return f(*args, **kwargs)
         else:
-            flash("Bu Sayfayı Görüntülemek İçin Lütfen Giriş Yapın",category="danger")
+            flash("Bu Sayfayı Görüntülemek İçin Lütfen Giriş Yapın",
+                  category="danger")
             return redirect(url_for("login"))
     return decorated_function
 
 
-
 # Register Form
 class RegisterForm(Form):
-    Name = StringField("İsim",validators=[validators.Length(min=2, max=40)])
-    SurName = StringField("Soyisim",validators=[
+    Name = StringField("İsim", validators=[validators.Length(min=2, max=40)])
+    SurName = StringField("Soyisim", validators=[
                           validators.Length(min=2, max=40)])
-    Password = PasswordField("Parola",validators=[
+    Password = PasswordField("Parola", validators=[
         validators.DataRequired(message="Lütfen Parola Belirleyin"),
         validators.EqualTo(fieldname="Confirm", message="Parola Uyuşmuyor")
     ])
     Confirm = PasswordField("Parola Doğrula")
-    Email = StringField("Email",validators=[validators.Email(
+    Email = StringField("Email", validators=[validators.Email(
         message="Lütfen geçerli bir e-mail adresi giriniz")])
 
-    Phone = StringField("Telefon",validators=[validators.Length(max = 13,min = 10)])
-    Adress = TextAreaField("Adres",validators=[validators.Length(max = 250,min = 0)])
+    Phone = StringField("Telefon Numarası", validators=[
+                        validators.Length(max=13, min=10)])
+    Adress = TextAreaField("Adres", validators=[
+                           validators.Length(max=250, min=0)])
+
 
 app = Flask(__name__)
 
 
-app.config["MYSQL_HOST"] = "localhost" 
-app.config["MYSQL_USER"] = "root"  
+app.config["MYSQL_HOST"] = "localhost"
+app.config["MYSQL_USER"] = "root"
 app.config["MYSQL_PASSWORD"] = ""
-app.config["MYSQL_DB"] = "e_manav"   
-app.config["MYSQL_CURSORCLASS"] = "DictCursor"  
-app.secret_key = "E_MANAV"                                     
+app.config["MYSQL_DB"] = "e_manav"
+app.config["MYSQL_CURSORCLASS"] = "DictCursor"
+app.secret_key = "E_MANAV"
 mysql = MySQL(app)
 
 TOTAL = 0
 
 products = {
-    "Ananas" : 15,
-    "Avokado" : 6,
-    "Armut" : 11,
-    "Cilek" : 30,
-    "Elma" : 5,
-    "Erik" : 35,
-    "Karpuz" : 8,
-    "Kavun" : 7,
-    "Kiraz" : 12,
-    "Kivi" : 14,
-    "Limon" : 10,
-    "Mandalina" : 6,
-    "Mango" : 16,
-    "Muz" : 16,
-    "Portakal" : 7,
-    "Incir" : 10,
-    "Seftali" : 13,
-    "Uzum" : 8,
-    "Barbunya" : 12,
-    "Biber" : 18,
-    "Domates" : 14,
-    "Fasulye" : 27,
-    "Havuc" : 4,
-    "Ispanak" : 13,
-    "Kabak" : 2,
-    "Lahana" : 11,
-    "Marul" : 4,
-    "Maydanoz" : 2,
-    "Patates" : 5,
-    "Patlican" : 9,
-    "Salatalik" : 8,
-    "Sarimsak" : 21,
-    "Sogan" : 4
+    "Ananas": 15,
+    "Avokado": 6,
+    "Armut": 11,
+    "Cilek": 30,
+    "Elma": 5,
+    "Erik": 35,
+    "Karpuz": 8,
+    "Kavun": 7,
+    "Kiraz": 12,
+    "Kivi": 14,
+    "Limon": 10,
+    "Mandalina": 6,
+    "Mango": 16,
+    "Muz": 16,
+    "Portakal": 7,
+    "Incir": 10,
+    "Seftali": 13,
+    "Uzum": 8,
+    "Barbunya": 12,
+    "Biber": 18,
+    "Domates": 14,
+    "Fasulye": 27,
+    "Havuc": 4,
+    "Ispanak": 13,
+    "Kabak": 2,
+    "Lahana": 11,
+    "Marul": 4,
+    "Maydanoz": 2,
+    "Patates": 5,
+    "Patlican": 9,
+    "Salatalik": 8,
+    "Sarimsak": 21,
+    "Sogan": 4
 }
 
 fruits = [
@@ -134,12 +139,13 @@ def sql_ChangeFunc(query):
     mysql.connection.commit()
     cursor.close()
 
+
 def sql_SelectFunc(query):
     cursor = mysql.connection.cursor()
     cursor.execute(query)
     data = cursor.fetchall()
     cursor.close()
-    
+
     return data
 
 
@@ -148,7 +154,8 @@ def index():
     session["status"] = "homepage"
     return render_template("homepage.html")
 
-@app.route("/login",methods = ["GET","POST"])
+
+@app.route("/login", methods=["GET", "POST"])
 def login():
     session["status"] = "login"
     if request.method == "POST":
@@ -164,22 +171,22 @@ def login():
             data = cursor.fetchone()
             real_password = data["password"]
 
-            if sha256_crypt.verify(password,real_password):
+            if sha256_crypt.verify(password, real_password):
                 session["logged_in"] = True
                 session["name"] = data["name"].title()
                 session["email"] = data["email"]
-                flash(f"Hoşgeldin {session['name']}" , category="success")
+                flash(f"Hoşgeldin {session['name']}", category="success")
                 cursor.close()
                 return redirect(url_for("index"))
             else:
-                flash("Şifre Yanlış" , category="danger")
+                flash("Şifre Yanlış", category="danger")
                 cursor.close()
                 return redirect(url_for("login"))
 
         else:
-            flash("Böyle Bir Kullanıcı Bulunmuyor" , category="danger")
+            flash("Böyle Bir Kullanıcı Bulunmuyor", category="danger")
             cursor.close()
-            return redirect(url_for("login"))        
+            return redirect(url_for("login"))
     else:
         return render_template("login.html")
 
@@ -219,19 +226,21 @@ def register():
         mysql.connection.commit()
         cursor.close()
 
-        flash("Başarı İle Kayıt Oldunuz" , category="success")
+        flash("Başarı İle Kayıt Oldunuz", category="success")
         return redirect(url_for("login"))
     else:
-        return render_template("register.html",form = form)
+        return render_template("register.html", form=form)
+
 
 @app.route("/logout")
 @login_required
 def logout():
     session.clear()
-    flash("Başarı İle Çıkış Yapıldı" , category="success")
+    flash("Başarı İle Çıkış Yapıldı", category="success")
     return redirect(url_for("index"))
 
-@app.route("/basket",methods = ["GET" , "POST"])
+
+@app.route("/basket", methods=["GET", "POST"])
 def basket():
     session["status"] = "basket"
     query = "select * from urun"
@@ -242,12 +251,12 @@ def basket():
     for i in toplam:
         result += i['islem_tutar']
     print(len(data))
-    
+
     session["TF"] = True
     if len(data) == 0:
         session["TF"] = False
-    
-    return render_template("basket.html" , datas = data , toplam = result) 
+
+    return render_template("basket.html", datas=data, toplam=result)
 
 
 @app.route("/myaccount")
@@ -256,13 +265,15 @@ def myaccount():
     session["status"] = "myaccount"
     email = session['email']
     query = f"select * from users where email = '{email}'"
-    data  = sql_SelectFunc(query)
+    data = sql_SelectFunc(query)
 
-    return render_template("myaccount.html",data = data[0])
+    return render_template("myaccount.html", data=data[0])
 
-@app.route("/meyvelermenu" , methods = ["GET","POST"])
-def meyveler():  
-    session["search"] = False
+
+
+@app.route("/meyvelermenu", methods=["GET", "POST"])
+def meyveler():
+
     session["status"] = "meyvelermenu"
     if request.method == "POST":
         print(request.form["product"])
@@ -277,9 +288,10 @@ def meyveler():
         ui = []
         for i in data:
             ui.append(i['urun_isim'])
-        
+
         if urun_isim in ui:
-            data = sql_SelectFunc(f"select adet from urun where urun_isim = '{urun_isim}'")
+            data = sql_SelectFunc(
+                f"select adet from urun where urun_isim = '{urun_isim}'")
             a = []
             for i in data:
                 a.append(i['adet'])
@@ -289,19 +301,20 @@ def meyveler():
         else:
             query = f"insert into urun(urun_isim,islem_tutar,fiyat,img_url,adet) values('{urun_isim}',{islem_tutar},{fiyat},'{img_url}',{adet})"
             sql_ChangeFunc(query)
-            
+
         return redirect(url_for("basket"))
     else:
         return render_template("meyvelermenu.html")
 
-@app.route("/sebzelermenu" , methods = ["GET" , "POST"])
+
+@app.route("/sebzelermenu", methods=["GET", "POST"])
 def sebzeler():
     session["search"] = False
     session["status"] = "sebzelermenu"
     if request.method == "POST":
         print(request.form["bakiye"])
         print(request.form["product"])
-        
+
         urun_isim = request.form["product"]
         adet = request.form["bakiye"]
         fiyat = products[urun_isim]
@@ -312,9 +325,10 @@ def sebzeler():
         ui = []
         for i in data:
             ui.append(i['urun_isim'])
-        
+
         if urun_isim in ui:
-            data = sql_SelectFunc(f"select adet from urun where urun_isim = '{urun_isim}'")
+            data = sql_SelectFunc(
+                f"select adet from urun where urun_isim = '{urun_isim}'")
             a = []
             for i in data:
                 a.append(i['adet'])
@@ -328,7 +342,8 @@ def sebzeler():
     else:
         return render_template("sebzelermenu.html")
 
-@app.route("/delete" , methods = ["GET" , "POST"])
+
+@app.route("/delete", methods=["GET", "POST"])
 def delete():
     if request.method == "POST":
         delete = request.form['delete'].lower()
