@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 import email_validator
 from flask import Flask, render_template, flash, url_for, redirect, session, logging, request
 from flask_mysqldb import MySQL
@@ -166,6 +167,19 @@ def register():
         Email = form.Email.data
         Number = form.Phone.data
         Adress = form.Adress.data
+
+        query = f"select * from users where email = '{Email}' or number = '{Number}'"
+        data = sql_SelectFunc(query)
+        print(data)
+        for i in data:
+            if i['email'] == Email:
+                flash("Bu E-mail Adresi Başka Biri Tarafından Kullanılmaktadır",category="danger")
+                return render_template("register.html",form=form)
+
+            if i['number'] == Number:
+                flash("Bu Telefon Numarası Başka Biri Tarafından Kullanılmaktadır",category="danger")
+                return render_template("register.html",form=form)
+        
 
         cursor = mysql.connection.cursor()
         query = f"Insert into users(name,surname,password,email,number,adress) VALUES('{Name}','{SurName}','{Password}','{Email}','{Number}','{Adress}')"
