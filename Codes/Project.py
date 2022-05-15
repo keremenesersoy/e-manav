@@ -208,7 +208,6 @@ def register():
 
         query = f"select * from users where email = '{Email}' or number = '{Number}'"
         data = sql_SelectFunc(query)
-        print(data)
         for i in data:
             if i['email'] == Email:
                 flash("Bu E-mail Adresi Başka Biri Tarafından Kullanılmaktadır",category="danger")
@@ -250,7 +249,7 @@ def basket():
     result = 0
     for i in toplam:
         result += i['islem_tutar']
-    print(len(data))
+
 
     session["TF"] = True
     if len(data) == 0:
@@ -276,8 +275,6 @@ def meyveler():
 
     session["status"] = "meyvelermenu"
     if request.method == "POST":
-        print(request.form["product"])
-        print(request.form["bakiye"])
         urun_isim = request.form["product"]
         adet = request.form["bakiye"]
         fiyat = products[urun_isim]
@@ -312,9 +309,7 @@ def sebzeler():
     session["search"] = False
     session["status"] = "sebzelermenu"
     if request.method == "POST":
-        print(request.form["bakiye"])
-        print(request.form["product"])
-
+        
         urun_isim = request.form["product"]
         adet = request.form["bakiye"]
         fiyat = products[urun_isim]
