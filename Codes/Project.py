@@ -176,6 +176,7 @@ def login():
                 session["name"] = data["name"].title()
                 session["email"] = data["email"]
                 session['id'] = data['id']
+                session['pass'] = password
                 flash(f"Hoşgeldin {session['name']}", category="success")
                 cursor.close()
                 return redirect(url_for("index"))
@@ -262,6 +263,7 @@ def basket():
 @app.route("/myaccount")
 @login_required
 def myaccount():
+    print(session['pass'])
     session["status"] = "myaccount"
     email = session['email']
     query = f"select * from users where email = '{email}'"
@@ -350,6 +352,38 @@ def delete():
         cursor.close()
         return redirect(url_for('basket'))
     return render_template("basket.html")
+
+@app.route('/changepassword' , methods=["GET","POST"])
+@login_required
+def changepassword():
+    if request.method == "POST":
+        password = request.form['passwordd']
+        new_password = request.form['newpassword1']
+        new_password_2 = request.form['newpassword2']
+        
+        if session['pass'] == password:
+
+            if new_password == new_password_2:
+                query = f"update users set password = '{sha256_crypt.encrypt(new_password)}'"
+                sql_ChangeFunc(query)
+                flash("Şifreniz Başarıyla Değişti" , category="success")
+                return redirect(url_for('myaccount'))
+            else:
+                flash("Yeni Şifreler Uyuşmuyor" , category="danger")
+                return redirect(url_for('myaccount'))
+    
+        else:
+            flash("Eski Şifreniz Yanlış" , category="danger")
+            return redirect(url_for('myaccount'))
+
+@app.route("/delluser")
+def delluser():
+    query = f"delete from users where id = {session['id']}"
+    sql_ChangeFunc(query)
+
+    flash("Hesabınız Başarıyla Silindi" , category='success')
+    return redirect(url_for('logout'))
+
 
 @app.route("/siparis" , methods = ["GET"])
 @login_required

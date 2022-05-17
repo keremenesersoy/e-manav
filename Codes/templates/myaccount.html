@@ -7,7 +7,6 @@
       <button class="nav-link active btn-danger" id="v-pills-bilgiler-tab" data-bs-toggle="pill" data-bs-target="#v-pills-bilgiler" type="button" role="tab" aria-controls="v-pills-bilgiler" aria-selected="true">Kullanıcı Bilgilerim</button>
       <button class="nav-link btn-danger" id="v-pills-basket-tab" data-bs-toggle="pill" data-bs-target="#v-pills-basket" type="button" role="tab" aria-controls="v-pills-basket" aria-selected="false">Siparişlerim</button>
       <button class="nav-link btn-danger" id="v-pills-sifreAyarlari-tab" data-bs-toggle="pill" data-bs-target="#v-pills-sifreAyarlari" type="button" role="tab" aria-controls="v-pills-sifreAyarlari" aria-selected="false">Şifre Ayarları</button>  
-      <button class="nav-link btn-danger" id="v-pills-hesabiSil-tab" data-bs-toggle="pill" data-bs-target="#v-pills-hesabiSil" type="button" role="tab" aria-controls="v-pills-hesabiSil" aria-selected="false">Hesabımı Sil</button>              
     </div>
     <div class="tab-content" id="v-pills-tabContent">
       <div class="tab-pane fade show active" id="v-pills-bilgiler" role="tabpanel" aria-labelledby="v-pills-bilgiler-tab">        
@@ -44,7 +43,7 @@
       </div>
 
       <div class="tab-pane fade" id="v-pills-sifreAyarlari" role="tabpanel" aria-labelledby="v-pills-sifreAyarlari-tab">
-        <form>
+        <form action="/changepassword" method="post">
           <div class="">     
             <div class="form-outline mb-4 mx-md-5">
               <b><label class="form-label" for="password">Mevcut Şifre</label></b>
@@ -59,12 +58,9 @@
               <input type="password" name="newpassword2" id="password" class="form-control" />                  
             </div>        
           </div>       
-          <button class="btn btn-secondary mx-md-5">Şifre Değiştir</button>   
+          <button class="btn btn-secondary mx-md-5" type="submit">Şifre Değiştir</button>   
         </form>
       </div>
-
-        <div class="tab-pane fade" id="v-pills-hesabiSil" role="tabpanel" aria-labelledby="v-pills-hesabiSil-tab">      
-        </div>
   </div>
 
 {% endblock %}
