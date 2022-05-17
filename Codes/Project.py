@@ -2,6 +2,7 @@ from dataclasses import dataclass
 import email_validator
 from flask import Flask, render_template, flash, url_for, redirect, session, logging, request
 from flask_mysqldb import MySQL
+from more_itertools import last
 from regex import F
 from requests import RequestException
 from sqlalchemy import true
@@ -10,6 +11,7 @@ from urllib3 import Retry
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
+from datetime import datetime
 
 # Kullanıcı Giriş Decoratarı
 
@@ -177,6 +179,7 @@ def login():
                 session["email"] = data["email"]
                 session['id'] = data['id']
                 session['pass'] = password
+                session['adress'] = data['adress']
                 flash(f"Hoşgeldin {session['name']}", category="success")
                 cursor.close()
                 return redirect(url_for("index"))
@@ -263,13 +266,37 @@ def basket():
 @app.route("/myaccount")
 @login_required
 def myaccount():
-    print(session['pass'])
     session["status"] = "myaccount"
     email = session['email']
     query = f"select * from users where email = '{email}'"
     data = sql_SelectFunc(query)
 
-    return render_template("myaccount.html", data=data[0])
+    query = f"select * from siparis where user_id = {session['id']}"
+    data_2 = sql_SelectFunc(query)
+
+    date_last_list = []
+
+    for i in data_2:
+        date_last = dict()
+        date_last['date'] = i['tarih']
+        date_last['adres'] = i['adres']
+        date_last['islem_tutar'] = i['islem_tutar']
+        date_last['idm'] = i['id']
+        simdi = datetime.now().strftime("%d / %m / %Y  %H:%M:%S")
+        simdi = datetime.strptime(simdi , "%d / %m / %Y  %H:%M:%S")
+        tarih = datetime.strptime(i['tarih'],"%d / %m / %Y  %H:%M:%S")
+        fark = simdi - tarih
+        if str(fark).find('days') != -1:
+            date_last['last'] = str(fark.days) + " Gün"
+        elif fark.seconds / 60 > 60:
+            date_last['last'] = str((fark.seconds // 3600)) + " Saat"
+        elif fark.seconds > 60:
+            date_last['last'] = str(fark.seconds // 60) + " Dakika"
+        else:
+            date_last['last'] = str(fark.seconds) + " Saniye"
+        date_last_list.append(date_last)
+
+    return render_template("myaccount.html", data=data[0] , date_last_list = date_last_list[::-1])
 
 
 
@@ -376,40 +403,58 @@ def changepassword():
             flash("Eski Şifreniz Yanlış" , category="danger")
             return redirect(url_for('myaccount'))
 
-@app.route("/delluser")
-def delluser():
-    query = f"delete from users where id = {session['id']}"
-    sql_ChangeFunc(query)
-
-    flash("Hesabınız Başarıyla Silindi" , category='success')
-    return redirect(url_for('logout'))
-
 
 @app.route("/siparis" , methods = ["GET"])
 @login_required
 def siparis():
     if request.method == "GET":
-        
 
         query = "select * from urun"
         data = sql_SelectFunc(query)
-        
+        result = 0
+
+        for i in data:
+            result += int(i['islem_tutar'])
+        adress = session['adress']
+        tarih = datetime.now().strftime("%d / %m / %Y  %H:%M:%S")
+        query = f"insert into siparis(tarih,islem_tutar,adres,user_id) values('{tarih}',{result},'{adress}',{session['id']})"
+        sql_ChangeFunc(query)
+
+        query = f"select * from siparis where user_id = {session['id']}"
+        data2 = sql_SelectFunc(query)
+
+        Sid = ""
+        for x in data2:
+            Sid = x['id']
+
         for i in data:
             urun_isim = i['urun_isim']
-            islem_tutar = i['islem_tutar']
-            fiyat = i['fiyat']
             img_url = i['img_url']
-            adet = i['adet'] 
-            user_id = session['id']
-            query = f"insert into history(urun_isim,islem_tutar,fiyat,img_url,adet,user_id) values('{urun_isim}',{islem_tutar},{fiyat},'{img_url}',{adet},{user_id})"
+            query = f"insert into history(urun_isim,islem_tutar,fiyat,img_url,adet,siparis_id) values('{urun_isim}',{i['islem_tutar']},{i['fiyat']},'{img_url}',{i['adet']},{Sid})"
             sql_ChangeFunc(query)
-        
+
         query = "delete from urun"
         sql_ChangeFunc(query)
 
         flash("Sipariş Talebiniz Başarıyla Alındı En Kısa Zamanda Yola Çıkacaktır" , category="success")
         return redirect(url_for('index'))
 
+@app.route('/history' , methods = ["GET","POST"])
+@login_required
+def history():
+    if request.method == "POST":
+        email = session['email']
+        query = f"select * from users where email = '{email}'"
+        data = sql_SelectFunc(query)
 
+        query = f"select * from history where siparis_id in (select id from siparis where id = {request.form['idm']})"
+        data_2 = sql_SelectFunc(query)
+
+        result = 0
+        for i in data_2:
+            result += int(i['islem_tutar'])
+
+        return render_template("history.html" , data_2 = data_2 , result = result , data = data[0])
+    return redirect(url_for("index"))
 if __name__ == "__main__":
     app.run(debug=True)
