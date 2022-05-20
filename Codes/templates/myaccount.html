@@ -45,12 +45,13 @@
           <form action="/history" method="post">
           <input type="hidden" name = "idm" value = "{{DLL['idm']}}">
           <button type="submit" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">{{DLL['islem_tutar']}} TL Turarındaki Siparişinize Gitmek İçin Tıklayınız</h5>
+            <div class="d-flex w-100 justify-content-between mt-2">
+              <h5 class="mb-1">{{DLL['islem_tutar']}} TL Tutarındaki Siparişinize Gitmek İçin Tıklayınız... &nbsp;&nbsp;&nbsp;</h5>       
               <small><i>{{DLL['last']}} Önce</i></small>
             </div>
-            <p class="mb-1">Adres : {{DLL['adres']}}</p>
-            <small>Tarih : {{DLL['date']}}</small>
+            <br>
+            <p class="mb-1">Adres: {{DLL['adres']}}</p>
+            <small>Tarih: {{DLL['date']}}</small>
           </button>
         </form>
           {% endfor %}
