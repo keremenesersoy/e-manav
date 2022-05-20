@@ -1,13 +1,6 @@
-from dataclasses import dataclass
 import email_validator
 from flask import Flask, render_template, flash, url_for, redirect, session, logging, request
 from flask_mysqldb import MySQL
-from more_itertools import last
-from regex import F
-from requests import RequestException
-from sqlalchemy import true
-from sympy import product
-from urllib3 import Retry
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
@@ -286,7 +279,7 @@ def myaccount():
         simdi = datetime.strptime(simdi , "%d / %m / %Y  %H:%M:%S")
         tarih = datetime.strptime(i['tarih'],"%d / %m / %Y  %H:%M:%S")
         fark = simdi - tarih
-        if str(fark).find('days') != -1:
+        if str(fark).find('day') != -1:
             date_last['last'] = str(fark.days) + " Gün"
         elif fark.seconds / 60 > 60:
             date_last['last'] = str((fark.seconds // 3600)) + " Saat"
