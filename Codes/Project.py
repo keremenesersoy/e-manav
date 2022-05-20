@@ -275,9 +275,9 @@ def myaccount():
         date_last['adres'] = i['adres']
         date_last['islem_tutar'] = i['islem_tutar']
         date_last['idm'] = i['id']
-        simdi = datetime.now().strftime("%d / %m / %Y  %H:%M:%S")
-        simdi = datetime.strptime(simdi , "%d / %m / %Y  %H:%M:%S")
-        tarih = datetime.strptime(i['tarih'],"%d / %m / %Y  %H:%M:%S")
+        simdi = datetime.now().strftime("%d / %m / %Y    %H:%M:%S")
+        simdi = datetime.strptime(simdi , "%d / %m / %Y    %H:%M:%S")
+        tarih = datetime.strptime(i['tarih'],"%d / %m / %Y    %H:%M:%S")
         fark = simdi - tarih
         if str(fark).find('day') != -1:
             date_last['last'] = str(fark.days) + " Gün"
@@ -288,6 +288,13 @@ def myaccount():
         else:
             date_last['last'] = str(fark.seconds) + " Saniye"
         date_last_list.append(date_last)
+    
+    if len(date_last_list) == 0:
+        session["Byt"] = False
+    else:
+        session['Byt'] = True
+
+    print(session['Byt'])
 
     return render_template("myaccount.html", data=data[0] , date_last_list = date_last_list[::-1])
 
