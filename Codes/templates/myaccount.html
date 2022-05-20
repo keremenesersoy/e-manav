@@ -40,8 +40,11 @@
 
       <div class="tab-pane fade" id="v-pills-basket" role="tabpanel" aria-labelledby="v-pills-basket-tab">
         <div class="list-group mx-md-5">
+           
+        {% if DLL %}
+          
+        {% for DLL in date_last_list %}
 
-          {% for DLL in date_last_list %}
           <form action="/history" method="post">
           <input type="hidden" name = "idm" value = "{{DLL['idm']}}">
           <button type="submit" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -53,7 +56,15 @@
             <small>Tarih : {{DLL['date']}}</small>
           </button>
         </form>
-          {% endfor %}
+        
+        {% endfor %}
+
+        {% else %}
+        
+        <h1>ürün yokturdaaaaaaaaaa</h1>
+
+        {% endif %}
+        
 
         </div>
       </div>
