@@ -294,7 +294,6 @@ def myaccount():
     else:
         session['Byt'] = True
 
-    print(session['Byt'])
 
     return render_template("myaccount.html", data=data[0] , date_last_list = date_last_list[::-1])
 
