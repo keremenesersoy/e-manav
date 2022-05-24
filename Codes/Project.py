@@ -304,6 +304,10 @@ def meyveler():
 
     session["status"] = "meyvelermenu"
     if request.method == "POST":
+        if request.form['bakiye'] == "":
+            flash("Lütfen Ürün Miktarı Giriniz",category="danger")
+            return render_template("meyvelermenu.html")
+
         urun_isim = request.form["product"]
         adet = request.form["bakiye"]
         fiyat = products[urun_isim]
@@ -338,6 +342,9 @@ def sebzeler():
     session["search"] = False
     session["status"] = "sebzelermenu"
     if request.method == "POST":
+        if request.form['bakiye'] == "":
+            flash("Lütfen Ürün Miktarı Giriniz",category="danger")
+            return render_template("sebzelermenu.html")
 
         urun_isim = request.form["product"]
         adet = request.form["bakiye"]
