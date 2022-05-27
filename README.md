@@ -4,7 +4,7 @@
 </br>
 
 ## Projenin Amacı
-İnsanlar, özellikle pandemiden sonra daha çok online alışverişe yöneldi ve artık günlük hayatımızın bir parçası olmaya başladı. Biz de bu durumdan yola çıkarak online alışveriş aracılığıyla manav alışverişini de kolaylaştırmayı amaçladık.
+Son yıllarda online alışverişe olan talep ve ilgi hem tüketici hem de üretici açısından hızla arttı. Online alışverişin işletmeler açısından getirdiği yeniliklerden en önemlisi daha fazla müşteriye daha kısa zamanda ulaşabilmesidir. Müşteriler açısından bakıldığında ise ihtiyaç duyulan ürüne daha kısa zamanda ve daha kolay bir şekilde en az maliyet oranı ile sahip olunabilmesidir. Hem üretici hem tüketici açısından olumlu etkileri ile günlük hayatımızın bir parçası olmuş durumdadır. Biz de bu durumdan yola çıkarak online alışveriş sektörüne manav reyonlarını da getirmeyi amaçladık.
 
 </br>
 
@@ -42,10 +42,10 @@ Online alışveriş uygulamalarında çeşitli manav ürünleri satılıyor faka
 ## Görev Dağılımı ve Son Tarihler
 
 **Kerem Enes Ersoy** </br>
-- [ ] Sitenin backend kısmı (25.05.2022)
-- [ ] Veri tabanı yönetimi (28.05.2022)
+- [x] Sitenin backend kısmı (25.05.2022)
+- [x] Veri tabanı yönetimi (28.05.2022)
 
 
 **İpek Çıdık** </br>
-- [ ] Site tasarımı (15.05.2022)
-- [ ] Sitenin frontend kısmı (18.05.2022)
+- [x] Site tasarımı (15.05.2022)
+- [x] Sitenin frontend kısmı (18.05.2022)
